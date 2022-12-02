@@ -1,0 +1,12 @@
+name: maid
+description: Maids handle your chores.
+version: 0.0.1
+homepage: https://github.com/kj415j45/maid-dart
+repository: https://github.com/kj415j45/maid-dart
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.16.0
