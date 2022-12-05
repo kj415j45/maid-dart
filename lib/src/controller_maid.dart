@@ -42,6 +42,25 @@ class ControllerMaid<Box> {
   void callMeOnTaken(void Function(Box oldBox, Box newBox) request) {
     _requests.add(request);
   }
+
+  /// Cancel a previous [request] added by [callMeOnTaken].
+  void cancelRequest(void Function(Box oldBox, Box newBox) request) {
+    _requests.remove(request);
+  }
+
+  /// C# style operator overloading of [callMeOnTaken].
+  ControllerMaid<Box> operator +(void Function(Box oldBox, Box newBox) request) {
+    callMeOnTaken(request);
+    return this;
+  }
+
+  /// C# style operator overloading of [cancelRequest].
+  ControllerMaid<Box> operator -(void Function(Box oldBox, Box newBox) request) {
+    cancelRequest(request);
+    return this;
+  }
+
+  Box operator <=(Box box) => take(box);
 }
 
 /// A [VowedControllerMaid] is a [ControllerMaid] that vow to secure the box forever.

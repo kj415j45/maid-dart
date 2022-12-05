@@ -20,7 +20,8 @@ void main() {
 
     test('Take another box', () {
       expect(maid.take(114514) == 42, isTrue);
-      expect(maid.box == 114514, isTrue);
+      var x = maid <= 233;
+      expect(233 == x, isTrue);
       maid.box = 42;
       expect(maid.serve() == 42, isTrue);
     });
@@ -29,6 +30,20 @@ void main() {
       expect(fileTaken, isFalse);
       maidOfFile.take(File('pubspec.yml'));
       expect(fileTaken, isTrue);
+
+      bool changed = false; // ignore: unused_local_variable
+      delegate(oldBox, newBox) {
+        changed = true;
+      }
+
+      maid += delegate;
+      maid.take(114514);
+      expect(changed, isTrue);
+
+      changed = false;
+      maid -= delegate;
+      maid.take(42);
+      expect(changed, isFalse);
     });
   });
 
