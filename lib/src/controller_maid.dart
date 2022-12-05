@@ -1,3 +1,5 @@
+typedef ControllerMaidDelegate<Box> = void Function(Box oldBox, Box newBox);
+
 /// [ControllerMaid] wrap a [_box] and holding it.
 /// Provide a controller-like interface.
 ///
@@ -36,25 +38,25 @@ class ControllerMaid<Box> {
   factory ControllerMaid.of(Box box, [bool vow = false]) =>
       vow ? VowedControllerMaid._hold(box) : ControllerMaid._hold(box);
 
-  final List<void Function(Box oldBox, Box newBox)> _requests = [];
+  final List<ControllerMaidDelegate<Box>> _requests = [];
 
-  /// [request] is a function that takes two arguments,
+  /// [request] is a function ([ControllerMaidDelegate]) that takes two arguments,
   /// the old box and the new box.
   ///
   /// You can add as many requests as you like, they would be called
   /// after box being changed by the order of adding.
-  void callMeOnTaken(void Function(Box oldBox, Box newBox) request) {
+  void callMeOnTaken(ControllerMaidDelegate<Box> request) {
     _requests.add(request);
   }
 
   /// Cancel a previous [request] added by [callMeOnTaken].
-  void cancelRequest(void Function(Box oldBox, Box newBox) request) {
+  void cancelRequest(ControllerMaidDelegate<Box> request) {
     _requests.remove(request);
   }
 
   /// C# style operator overloading of [callMeOnTaken].
   ControllerMaid<Box> operator +(
-    void Function(Box oldBox, Box newBox) request,
+    ControllerMaidDelegate<Box> request,
   ) {
     callMeOnTaken(request);
     return this;
@@ -62,7 +64,7 @@ class ControllerMaid<Box> {
 
   /// C# style operator overloading of [cancelRequest].
   ControllerMaid<Box> operator -(
-    void Function(Box oldBox, Box newBox) request,
+    ControllerMaidDelegate<Box> request,
   ) {
     cancelRequest(request);
     return this;
@@ -85,7 +87,7 @@ class VowedControllerMaid<Box> extends ControllerMaid<Box> {
   Box take(Box box) => throw BreakingVowException();
 
   @override
-  void callMeOnTaken(void Function(Box oldBox, Box newBox) request) =>
+  void callMeOnTaken(ControllerMaidDelegate<Box> request) =>
       throw BreakingVowException();
 }
 
