@@ -7,11 +7,14 @@ void main() {
       //async callback
       await Future.delayed(const Duration(seconds: 1));
       print('[async] I got a new value: $newBox, the old one is: $oldBox');
-    })
-    ..callMeOnTaken((oldBox, newBox) {
-      //sync callback
-      print('I got a new value: $newBox, the old one is: $oldBox');
     });
+
+  delegate(oldBox, newBox) {
+    //sync callback
+    print('I got a new value: $newBox, the old one is: $oldBox');
+  }
+
+  maid += delegate; //C# like delegate
 
   // Ask maid to serve the box
   print(maid.serve()); // 42
