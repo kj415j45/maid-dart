@@ -54,7 +54,8 @@ class VowedControllerMaid<Box> extends ControllerMaid<Box> {
   Box take(Box box) => throw BreakingVowException();
 
   @override
-  void callMeOnTaken(void Function(Box oldBox, Box newBox) request) => throw BreakingVowException();
+  void callMeOnTaken(void Function(Box oldBox, Box newBox) request) =>
+      throw BreakingVowException();
 }
 
 class BreakingVowException implements Exception {
