@@ -21,7 +21,7 @@ void main() {
     test('Take another box', () {
       expect(maid.take(114514) == 42, isTrue);
       var x = maid <= 233;
-      expect(233 == x, isTrue);
+      expect(114514 == x, isTrue);
       maid.box = 42;
       expect(maid.serve() == 42, isTrue);
     });
