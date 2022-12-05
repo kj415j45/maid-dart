@@ -8,7 +8,11 @@
 class ControllerMaid<Box> {
   Box _box;
 
+  @Deprecated(
+      'Getter and Setter of [box] may changed its behavior in the future.')
   Box get box => serve();
+  @Deprecated(
+      'Getter and Setter of [box] may changed its behavior in the future.')
   set box(Box box) => take(box);
 
   /// Serve the box that maid is holding.
@@ -49,18 +53,26 @@ class ControllerMaid<Box> {
   }
 
   /// C# style operator overloading of [callMeOnTaken].
-  ControllerMaid<Box> operator +(void Function(Box oldBox, Box newBox) request) {
+  ControllerMaid<Box> operator +(
+    void Function(Box oldBox, Box newBox) request,
+  ) {
     callMeOnTaken(request);
     return this;
   }
 
   /// C# style operator overloading of [cancelRequest].
-  ControllerMaid<Box> operator -(void Function(Box oldBox, Box newBox) request) {
+  ControllerMaid<Box> operator -(
+    void Function(Box oldBox, Box newBox) request,
+  ) {
     cancelRequest(request);
     return this;
   }
 
+  /// Alternative of [take].
   Box operator <=(Box box) => take(box);
+
+  ///Alternative of [serve].
+  Box operator ~() => serve();
 }
 
 /// A [VowedControllerMaid] is a [ControllerMaid] that vow to secure the box forever.

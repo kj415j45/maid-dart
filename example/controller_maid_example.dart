@@ -23,6 +23,10 @@ void main() {
   // then callMeOnTake will be called
   print(maid.take(233)); //42
 
+  // Alternative way to serve the box
   // Maid is serving [233] now
-  print(maid.serve()); // 233
+  print(~maid); // 233
+
+  // Alternative way to take another box
+  print(maid <= 114514); //233
 }

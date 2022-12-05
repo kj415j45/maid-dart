@@ -14,6 +14,8 @@ void main() {
       });
 
     test('Serve box', () {
+      expect(~maid == 42, isTrue);
+      // ignore: deprecated_member_use_from_same_package
       expect(maid.box == 42, isTrue);
       expect(maid.serve() == 42, isTrue);
     });
@@ -22,6 +24,7 @@ void main() {
       expect(maid.take(114514) == 42, isTrue);
       var x = maid <= 233;
       expect(114514 == x, isTrue);
+      // ignore: deprecated_member_use_from_same_package
       maid.box = 42;
       expect(maid.serve() == 42, isTrue);
     });
@@ -31,7 +34,7 @@ void main() {
       maidOfFile.take(File('pubspec.yml'));
       expect(fileTaken, isTrue);
 
-      bool changed = false; // ignore: unused_local_variable
+      bool changed = false;
       delegate(oldBox, newBox) {
         changed = true;
       }
