@@ -14,6 +14,7 @@ class SingletonMaid {
   /// ```dart
   /// print(SingletonMaid.of<int?>(42) == SingletonMaid.of<int>(42)); // false
   /// ```
-  static VowedControllerMaid<T> of<T>([T? box]) =>
-      (_maids[T] ??= ControllerMaid<T>.of(box as T, true) as VowedControllerMaid<T>) as VowedControllerMaid<T>;
+  static VowedControllerMaid<T> of<T>([T? box]) => (_maids[T] ??=
+          ControllerMaid<T>.of(box as T, true) as VowedControllerMaid<T>)
+      as VowedControllerMaid<T>;
 }
